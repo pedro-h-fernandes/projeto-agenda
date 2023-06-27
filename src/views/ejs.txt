@@ -1,6 +1,0 @@
-<% controle de fluxo %> (if, else, for...) 
-<%= imprime escapando caractere%> (nao le tags)
-<%- não escapa caracteres %> (aceita tags)
-<%# comentario %>
-<%- include('CAMINHO-ARQUIVO)%>
-
