@@ -1,22 +1,52 @@
 <%- include('includes/head')%>
+    <%- include('includes/navbar')%>
 
+        <section class="container">
+            <div class="row">
+                <div class="col-lg-2"></div>
 
-    <section class="container">
-        <h1>
-            <% if(typeof titulo !=='undefined' ) {%>
-                <%= titulo %> <!--exibe exatamente o que vc escrever--> <br>
-                    <%- titulo %> <!--  aceita tags html   -->
+                <div class="col-lg-8 my-3">
+                    <h1 class="text-center">Agenda</h1>
+                    <p class="text-center lead">veja seus contatos abaixo</p>
 
-                        <%}else{ %>
-                            o titulo não foi enviado
-                            <%}%>
+                    <div class="row">
+                        <div class="col my-3">
+                            <div class="alert alert-danger">erro qualquer</div>
+                        </div>
+                    </div>
 
-        </h1>
+                    <div class="responsive-table">
+                        <table class="table my-3 table-striped table-hover">
+                            <tr>
+                                <td>Luiz</td>
+                                <td>otavio</td>
+                                <td>2343246567</td>
+                                <td>email2email.com</td>
+                            </tr>
+                        <tr>
+                            <td>Luiz</td>
+                            <td>otavio</td>
+                            <td>2343246567</td>
+                            <td>email2email.com</td>
+                        </tr>
+                        <tr>
+                            <td>Luiz</td>
+                            <td>otavio</td>
+                            <td>2343246567</td>
+                            <td>email2email.com</td>
+                        </tr>
+                        <tr>
+                            <td>Luiz</td>
+                            <td>otavio</td>
+                            <td>2343246567</td>
+                            <td>email2email.com</td>
+                        </tr>
+                    </table>
+                    </div>
+                </div>
 
-        <form action="/" method="post"><input type="hidden" name="_csrf" value="<%= csrfToken%>">
-            <label for="nome">Cliente</label>
-            <input type="text" name="cliente" id="cliente">
-            <button>Submit</button>
-        </form>
+                <div class="col-lg-2"></div>
+            </div>
+        </section>
 
         <%- include('includes/footer')%>
