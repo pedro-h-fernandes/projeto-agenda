@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
+const bcryptjs = require('bcryptjs') // responsavel pelo hash da senha (ler documentação)
+
 const LoginSchema = new mongoose.Schema({
     email: { type: String, required: true },
     password: { type: String, required: true }
@@ -14,25 +16,46 @@ class Login {
         this.user = null;
     }
 
-    valida() {
+    validaCampos() {
         this.cleanUp();
-        if(!validator.isEmail(this.body.email)) this.errors.push('Email Inválido')
+        if (!validator.isEmail(this.body.email)) this.errors.push('Email Inválido')
 
-        if (this.body.password.length < 3 || this.body.password.length > 50){
+        if (this.body.password.length < 3 || this.body.password.length > 50) {
             this.errors.push('Senha precisa ter entre 3 e 50 caracteres')
         }
     }
 
-   async register() {
-        this.valida()
-        if(this.errors.length > 0) return 
+    async register() {
+        this.validaCampos()
+        if (this.errors.length > 0) return
+        await this.userExists()
+        if (this.errors.length > 0) return
+        const salt = bcryptjs.genSaltSync() // faz o hash da senha do usuario
+        this.body.password = bcryptjs.hashSync(this.body.password, salt)
+        this.user = await LoginModel.create(this.body)
+    }
 
-        try {
-            this.user = await LoginModel.create(this.body)
-        }catch(e) {
-            console.log(e)
+    async login() {
+        this.validaCampos()
+        if (this.errors.length > 0) return
+        this.user = await LoginModel.findOne({ email: this.body.email })
+
+        if (!this.user) {
+            this.errors.push('Usuário não existe')
+            return
         }
 
+        if (!bcryptjs.compareSync(this.body.password, this.user.password)){
+            this.errors.push('Senha Inválida')
+            this.user = null; 
+            return
+        }
+    }
+
+
+    async userExists() {
+        this.user = await LoginModel.findOne({ email: this.body.email })
+        if (this.user) this.errors.push('Usuário ja existente')
     }
 
     cleanUp() {
