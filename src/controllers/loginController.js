@@ -54,6 +54,7 @@ exports.login = async (req, res) => {
 }
 
 exports.logout = (req, res) => {
-    req.session.destroy();
+    req.flash('success', 'Login realizado com sucesso')
     res.redirect('/');
+    req.session.destroy();
 }
