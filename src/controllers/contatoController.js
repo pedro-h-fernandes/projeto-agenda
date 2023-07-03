@@ -1,3 +1,3 @@
-exports.paginaInicial = (req, res) => {
-    res.send('essa é a pagina inicial do contato')
+exports.index = (req, res) => {
+    res.render('contato.ejs')
 }
