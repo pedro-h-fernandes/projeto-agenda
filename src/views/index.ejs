@@ -7,7 +7,11 @@
                 
                 <div class="col-lg-8 my-3">
                     <h1 class="text-center">Agenda</h1>
-                    <p class="text-center lead">veja seus contatos abaixo</p>
+                    <% if(!user) {%>
+                        <p class="text-center lead">Faça o login para cadastrar seus contatos</p>
+                        <%}else {%>
+                            <p class="text-center lead">Veja seus contatos abaixo</p>
+                            <%}%>
 
 
                 <%- include('includes/messages')%>
