@@ -37,7 +37,7 @@ exports.login = async (req, res) => {
         if (login.errors.length > 0) {
             req.flash('errors', login.errors)
             req.session.save(function () {
-                return res.redirect('/login/index');
+                return res.redirect('/');
             });
             return;
         }
@@ -55,7 +55,6 @@ exports.login = async (req, res) => {
 }
 
 exports.logout = (req, res) => {
-    req.flash('success', 'Login realizado com sucesso')
-    res.redirect('/');
     req.session.destroy();
+    res.redirect('/');
 }

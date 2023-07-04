@@ -39,6 +39,12 @@ class Contato {
         this.contato = await ContatoModel.create(this.body)
     }
 
+    static async findById(id) {
+        if(typeof(id) !== 'string') return
+        const contato = await ContatoModel.findById(id)
+        return contato
+    }
+
     // async login() {
     //     this.validaCampos()
     //     if (this.errors.length > 0) return

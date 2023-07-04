@@ -1,35 +1,57 @@
 <%- include('includes/head')%>
     <%- include('includes/navbar')%>
-    
-    <section class="container">
+
+        <section class="container">
             <div class="row">
                 <div class="col-lg-2"></div>
-                
+
                 <div class="col-lg-8 my-3">
                     <h1 class="text-center">Agenda</h1>
                     <% if(!user) {%>
                         <p class="text-center lead">Faça o login para cadastrar seus contatos</p>
-                        <%}else {%>
-                            <p class="text-center lead">Veja seus contatos abaixo</p>
-                            <%}%>
+
+                        <%- include('includes/messages')%>
+                            <div class="col-lg">
+                                <form action="/login/login" method="POST">
+                                    <input type="hidden" name="_csrf" value=<%=csrfToken%>>
+                                    <div class=" form-group mb-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" name="email" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Senha</label>
+                                        <input type="password" class="form-control" name="password"
+                                            id="exampleInputPassword1">
+                                    </div>
+
+                                    <button type="submit" class="btn  btn-primary">Entrar</button>
+                                    <small id="cadastro" class="form-text text-muted">Não possui conta? <a href="login/index">Cadastre-se</a>.</small>
+                                </form>
+                            </div>
+                            <%}else {%>
+                                <p class="text-center lead">Veja seus contatos abaixo</p>
 
 
-                <%- include('includes/messages')%>
 
-                    <div class="responsive-table">
-                        <table class="table my-3 table-striped table-hover">
-                            <thead class="ms-auto">
-                                <th scope="col">Nome</th>
-                                <th scope="col">Sobrenome</th>
-                                <th scope="col">Telefone</th>
-                                <th scope="col">Email</th>
-                            </thead>
+                                <%- include('includes/messages')%>
 
-                            <tbody class="table-group-divider">
+                                    <div class="responsive-table">
+                                        <table class="table my-3 table-striped table-hover">
+                                            <thead class="ms-auto">
+                                                <th scope="col">Nome</th>
+                                                <th scope="col">Sobrenome</th>
+                                                <th scope="col">Telefone</th>
+                                                <th scope="col">Email</th>
+                                            </thead>
 
-                            </tbody>
-                        </table>
-                    </div>
+                                            <tbody class="table-group-divider">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <%}%>
                 </div>
 
                 <div class="col-lg-2"></div>
