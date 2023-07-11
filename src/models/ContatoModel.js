@@ -39,29 +39,13 @@ class Contato {
         this.contato = await ContatoModel.create(this.body)
     }
 
-    static async findById(id) {
-        if(typeof(id) !== 'string') return
-        const contato = await ContatoModel.findById(id)
-        return contato
+    async edit(id) {
+        if (typeof (id) !== 'string') return
+        this.validaCampos()
+        if (this.errors.length > 0) return
+
+        this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, { new: true })
     }
-
-    // async login() {
-    //     this.validaCampos()
-    //     if (this.errors.length > 0) return
-    //     this.contato = await ContatoModel.findOne({ email: this.body.email })
-
-    //     if (!this.contato) {
-    //         this.errors.push('Usuário não existe')
-    //         return
-    //     }
-
-    //     if (!bcryptjs.compareSync(this.body.password, this.contato.password)){
-    //         this.errors.push('Senha Inválida')
-    //         this.contato = null; 
-    //         return
-    //     }
-    // }
-
 
     async contactExists() {
         this.contato = await ContatoModel.findOne({ email: this.body.email, telefone: this.body.telefone })
@@ -70,7 +54,7 @@ class Contato {
 
     cleanUp() {
         for (const key in this.body) {
-            if (typeof this.body[key] !== 'string') { //checa se o tipo do body eh string
+            if (typeof this.body[key] !== 'string') { 
                 this.body[key] = ''
             }
         }
@@ -81,6 +65,23 @@ class Contato {
             telefone: this.body.telefone,
             email: this.body.email
         }
+    }
+
+    static async findById(id) {
+        if (typeof (id) !== 'string') return
+        const contato = await ContatoModel.findById(id)
+        return contato
+    }
+    
+    static async buscaContato() {
+        const contatos = await ContatoModel.find().sort({criadoEm: -1})
+        return contatos
+    }
+    
+    static async delete(id) {
+        if (typeof (id) !== 'string') return;
+        const contatoApagado = await ContatoModel.findByIdAndDelete(id);
+        return contatoApagado;
     }
 }
 
