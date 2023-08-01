@@ -26,7 +26,7 @@ const { middlewareGlobal, checkCsrfError, csrfMiddleware } = require('./src/midd
 app.use(helmet());
 app.use(express.urlencoded({ extended: true })); // vai tratar o body das requisições
 app.use(express.json());
-app.use(express.static(path.resolve(__dirname, 'public'))) // define a pasta de conteudo estático
+app.use(express.static(path.join(__dirname, 'public'))) // define a pasta de conteudo estático
 
 const sessionOptions = session({
     secret: 'jkasd78i9atyda8da9o8ehfo42fh294fh%Y',

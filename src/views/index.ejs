@@ -12,7 +12,7 @@
 
                         <%- include('includes/messages')%>
                             <div class="col-lg">
-                                <form action="/login/login" method="POST">
+                                <form class="form-login" action="/login/login" method="POST">
                                     <input type="hidden" name="_csrf" value=<%=csrfToken%>>
                                     <div class=" form-group mb-3">
                                         <label class="form-label">Email</label>
@@ -28,7 +28,7 @@
 
                                     <button type="submit" class="btn  btn-primary">Entrar</button>
                                     <small id="cadastro" class="form-text text-muted">Não possui conta? <a
-                                            href="login/index">Cadastre-se</a>.</small>
+                                            href="login/">Cadastre-se</a>.</small>
                                 </form>
                             </div>
                             <%}else {%>
@@ -37,51 +37,55 @@
 
 
                                 <%- include('includes/messages')%>
-                                <% if(contatos.length > 0) {%>
-                                    <div class="responsive-table">
-                                        <table class="table my-3 table-striped table-hover">
-                                            <thead class="ms-auto">
-                                                <th scope="col">Nome</th>
-                                                <th scope="col">Sobrenome</th>
-                                                <th scope="col">Telefone</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Ações</th>
-                                            </thead>
+                                    <% if(contatos.length> 0) {%>
+                                        <div class="responsive-table">
+                                            <table class="table my-3 table-striped table-hover">
+                                                <thead class="ms-auto">
+                                                    <th scope="col">Nome</th>
+                                                    <th scope="col">Sobrenome</th>
+                                                    <th scope="col">Telefone</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Ações</th>
+                                                </thead>
 
-                                            <tbody class="table-group-divider">
-                                                <% contatos.forEach(contato=> { %>
-                                                    <tr>
-                                                        <td>
-                                                            <%= contato.nome %>
-                                                        </td>
-                                                        <td>
-                                                            <%= contato.sobrenome %>
-                                                        </td>
-                                                        <td>
-                                                            <%= contato.telefone %>
-                                                        </td>
-                                                        <td>
-                                                            <%= contato.email %>
-                                                        </td>
-                                                        <td>
-                                                            <a class="text-decoration-none" href="/contato/<%= contato._id %>">Editar</a>
-                                                        </td>
-                                                        <td>
-                                                            <a class="text-danger text-decoration-none" href="/contato/delete/<%= contato._id %>">Excluir</a>
-                                                        </td>
-                                                    </tr>
-                                                    <%}) %>
+                                                <tbody class="table-group-divider">
+                                                    <% contatos.forEach(contato=> { %>
+                                                        <tr>
+                                                            <td>
+                                                                <%= contato.nome %>
+                                                            </td>
+                                                            <td>
+                                                                <%= contato.sobrenome %>
+                                                            </td>
+                                                            <td>
+                                                                <%= contato.telefone %>
+                                                            </td>
+                                                            <td>
+                                                                <%= contato.email %>
+                                                            </td>
+                                                            <td>
+                                                                <a class="text-decoration-none"
+                                                                    href="/contato/<%= contato._id %>">Editar</a>
+                                                            </td>
+                                                            <td>
+                                                                <a class="text-danger text-decoration-none"
+                                                                    href="/contato/delete/<%= contato._id %>">Excluir</a>
+                                                            </td>
+                                                        </tr>
+                                                        <%}) %>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <%}else {%>
-                                        <div class="text-center">
-                                            <p class=" text-bold-500 lead" ><strong>Não existem contatos na sua agenda.</strong></p>
-                                            <a href="/contato" class="text-decoration-none"><button class="btn btn-primary"> Cadastrar contato</button></a>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    <%}%>
-                                    <%}%>
+                                        <%}else {%>
+                                            <div class="text-center">
+                                                <p class=" text-bold-500 lead"><strong>Não existem contatos na sua
+                                                        agenda.</strong></p>
+                                                <a href="/contato" class="text-decoration-none"><button
+                                                        class="btn btn-primary"> Cadastrar contato</button></a>
+                                            </div>
+                                            <%}%>
+                                                <%}%>
                 </div>
 
                 <div class="col-lg-2"></div>
